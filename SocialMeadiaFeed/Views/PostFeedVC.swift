@@ -10,6 +10,7 @@ final class PostFeedVC: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(PostCell.self, forCellReuseIdentifier: PostCell.reuseIdentifier)
         return tableView
     }()
 
@@ -19,6 +20,7 @@ final class PostFeedVC: UIViewController {
         setupSubviews()
         setupConstraints()
         bindViewModel()
+        
     }
     
     private func setupSubviews() {
@@ -56,12 +58,9 @@ extension PostFeedVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.reuseIdentifier, for: indexPath) as? PostCell else { return UITableViewCell() }
         let post = viewModel.post(at: indexPath.row)
-        cell.textLabel?.text = post.title
-        cell.detailTextLabel?.text = post.body
-        cell.textLabel?.numberOfLines = 0
-        cell.detailTextLabel?.numberOfLines = 0
+        cell.configure(post: post)
         return cell
     }
 }
