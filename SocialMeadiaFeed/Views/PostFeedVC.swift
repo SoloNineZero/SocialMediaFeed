@@ -4,6 +4,7 @@ final class PostFeedVC: UIViewController {
 
     // MARK: - Private properties
     private let viewModel = PostFeedViewModel()
+    private var isLoading = true
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -11,6 +12,7 @@ final class PostFeedVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostCell.self, forCellReuseIdentifier: PostCell.reuseIdentifier)
+        tableView.register(ShimmerPostCell.self, forCellReuseIdentifier: ShimmerPostCell.reuseIdentifier)
         return tableView
     }()
 
@@ -37,10 +39,11 @@ final class PostFeedVC: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.fetchPosts()
+        viewModel.fetchData()
 
         viewModel.onPostsUpdated = { [weak self] in
             DispatchQueue.main.async {
+                self?.isLoading = false
                 self?.tableView.reloadData()
             }
         }
@@ -48,20 +51,26 @@ final class PostFeedVC: UIViewController {
         viewModel.onError = { error in
             print("Ошибка \(error.localizedDescription)")
         }
+        
     }
 }
 
 // MARK: - UITableViewDataSource
 extension PostFeedVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfPosts()
+        isLoading ? 5 : viewModel.numberOfPosts()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.reuseIdentifier, for: indexPath) as? PostCell else { return UITableViewCell() }
-        let post = viewModel.post(at: indexPath.row)
-        cell.configure(post: post)
-        return cell
+        if isLoading {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ShimmerPostCell.reuseIdentifier, for: indexPath) as? ShimmerPostCell else { return UITableViewCell() }
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.reuseIdentifier, for: indexPath) as? PostCell else { return UITableViewCell() }
+            let post = viewModel.post(at: indexPath.row)
+            cell.configure(post: post)
+            return cell
+        }
     }
 }
 

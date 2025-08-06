@@ -6,7 +6,7 @@ final class PostCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.font = UIFont.systemFont(ofSize: 20)
         label.numberOfLines = 0
         return label
     }()
@@ -14,9 +14,27 @@ final class PostCell: UITableViewCell {
     private lazy var bodyLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 0
         return label
+    }()
+    
+    private lazy var authorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.italicSystemFont(ofSize: 14)
+        label.textAlignment = .right
+        return label
+    }()
+    
+    private lazy var avatarImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 25
+        image.tintColor = .systemGray3
+        return image
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -28,27 +46,46 @@ final class PostCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configure(post: Post) {
+        
+    func configure(post: PostWithAuthor) {
         titleLabel.text = post.title
         bodyLabel.text = post.body
+        authorLabel.text = post.author
+        avatarImage.image = UIImage(systemName: "person.crop.circle")
+        
+        ImageLoaderService.load(from: post.avatar) { [weak self] image in
+            guard let self = self else { return }
+            if let image = image {
+                self.avatarImage.image = image
+            }
+        }
     }
     
     private func setupSubviews() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(bodyLabel)
+        contentView.addSubview(authorLabel)
+        contentView.addSubview(avatarImage)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            avatarImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            avatarImage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            avatarImage.heightAnchor.constraint(equalToConstant: 50),
+            avatarImage.widthAnchor.constraint(equalToConstant: 50),
+            
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            titleLabel.leftAnchor.constraint(equalTo: avatarImage.rightAnchor, constant: 16),
             titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
             
             bodyLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            bodyLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            bodyLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor),
             bodyLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
-            bodyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
+            
+            authorLabel.topAnchor.constraint(equalTo: bodyLabel.bottomAnchor, constant: 12),
+            authorLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
+            authorLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
         ])
     }
 }

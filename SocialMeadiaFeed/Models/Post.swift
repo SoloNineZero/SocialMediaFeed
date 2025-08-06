@@ -1,10 +1,3 @@
-//
-//  Post.swift
-//  SocialMeadiaFeed
-//
-//  Created by Igor Solodyankin on 06.08.2025.
-//
-
 import Foundation
 
 struct Post: Decodable {
@@ -12,4 +5,17 @@ struct Post: Decodable {
     let id: Int
     let title: String
     let body: String
+}
+
+struct User: Decodable {
+    let id: Int
+    let name: String
+}
+
+struct PostWithAuthor {
+    let id: Int
+    let title: String
+    let body: String
+    let author: String
+    let avatar: URL
 }

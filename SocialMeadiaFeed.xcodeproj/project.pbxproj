@@ -157,6 +157,7 @@
 				DEVELOPMENT_TEAM = CHYW2NTRQ3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SocialMeadiaFeed/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SMF;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -189,6 +190,7 @@
 				DEVELOPMENT_TEAM = CHYW2NTRQ3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SocialMeadiaFeed/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SMF;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
