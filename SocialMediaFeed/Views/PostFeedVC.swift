@@ -6,6 +6,8 @@ final class PostFeedVC: UIViewController {
     private let viewModel = PostFeedViewModel()
     private var isLoading = true
     
+    private let refreshControl = UIRefreshControl()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -13,6 +15,7 @@ final class PostFeedVC: UIViewController {
         tableView.delegate = self
         tableView.register(PostCell.self, forCellReuseIdentifier: PostCell.reuseIdentifier)
         tableView.register(ShimmerPostCell.self, forCellReuseIdentifier: ShimmerPostCell.reuseIdentifier)
+        tableView.refreshControl = refreshControl
         return tableView
     }()
 
@@ -23,7 +26,7 @@ final class PostFeedVC: UIViewController {
         setupSubviews()
         setupConstraints()
         bindViewModel()
-        
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
     }
     
     private func setupSubviews() {
@@ -41,18 +44,41 @@ final class PostFeedVC: UIViewController {
     
     private func bindViewModel() {
         viewModel.fetchData()
-
+//
+//        viewModel.onPostsUpdated = { [weak self] in
+//            DispatchQueue.main.async {
+//                self?.isLoading = false
+//                self?.tableView.reloadData()
+//            }
+//        }
+//        
+//        viewModel.onError = { error in
+//            print("Ошибка \(error.localizedDescription)")
+//        }
+        
         viewModel.onPostsUpdated = { [weak self] in
             DispatchQueue.main.async {
                 self?.isLoading = false
                 self?.tableView.reloadData()
+                self?.refreshControl.endRefreshing() // <--- здесь останавливаем refresh
             }
         }
-        
-        viewModel.onError = { error in
-            print("Ошибка \(error.localizedDescription)")
+
+        viewModel.onError = { [weak self] error in
+            DispatchQueue.main.async {
+                self?.refreshControl.endRefreshing() // останавливаем и при ошибке
+                print("Ошибка \(error.localizedDescription)")
+            }
         }
-        
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+    }
+    
+    @objc
+    private func handleRefresh() {
+        viewModel.reloadPosts()
     }
 }
 
