@@ -1,8 +1,8 @@
 import Foundation
 import Alamofire
 
-final class ImageService {
-    static let shared = ImageService()
+final class ImageURLService {
+    static let shared = ImageURLService()
     
     private init() {}
     

@@ -11,26 +11,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A83953C22E4362DA0036A1C9 /* SocialMeadiaFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialMeadiaFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A83953C22E4362DA0036A1C9 /* SocialMediaFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialMediaFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A83953D42E4362DE0036A1C9 /* Exceptions for "SocialMeadiaFeed" folder in "SocialMeadiaFeed" target */ = {
+		A83C65422E4486A10006A6C2 /* Exceptions for "SocialMediaFeed" folder in "SocialMediaFeed" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = A83953C12E4362DA0036A1C9 /* SocialMeadiaFeed */;
+			target = A83953C12E4362DA0036A1C9 /* SocialMediaFeed */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A83953C42E4362DA0036A1C9 /* SocialMeadiaFeed */ = {
+		A83953C42E4362DA0036A1C9 /* SocialMediaFeed */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A83953D42E4362DE0036A1C9 /* Exceptions for "SocialMeadiaFeed" folder in "SocialMeadiaFeed" target */,
+				A83C65422E4486A10006A6C2 /* Exceptions for "SocialMediaFeed" folder in "SocialMediaFeed" target */,
 			);
-			path = SocialMeadiaFeed;
+			path = SocialMediaFeed;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -50,7 +50,7 @@
 		A83953B92E4362DA0036A1C9 = {
 			isa = PBXGroup;
 			children = (
-				A83953C42E4362DA0036A1C9 /* SocialMeadiaFeed */,
+				A83953C42E4362DA0036A1C9 /* SocialMediaFeed */,
 				A83953C32E4362DA0036A1C9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,7 +58,7 @@
 		A83953C32E4362DA0036A1C9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A83953C22E4362DA0036A1C9 /* SocialMeadiaFeed.app */,
+				A83953C22E4362DA0036A1C9 /* SocialMediaFeed.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,9 +66,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A83953C12E4362DA0036A1C9 /* SocialMeadiaFeed */ = {
+		A83953C12E4362DA0036A1C9 /* SocialMediaFeed */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A83953D52E4362DE0036A1C9 /* Build configuration list for PBXNativeTarget "SocialMeadiaFeed" */;
+			buildConfigurationList = A83953D52E4362DE0036A1C9 /* Build configuration list for PBXNativeTarget "SocialMediaFeed" */;
 			buildPhases = (
 				A83953BE2E4362DA0036A1C9 /* Sources */,
 				A83953BF2E4362DA0036A1C9 /* Frameworks */,
@@ -79,14 +79,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				A83953C42E4362DA0036A1C9 /* SocialMeadiaFeed */,
+				A83953C42E4362DA0036A1C9 /* SocialMediaFeed */,
 			);
-			name = SocialMeadiaFeed;
+			name = SocialMediaFeed;
 			packageProductDependencies = (
 				A83953DC2E436E7A0036A1C9 /* Alamofire */,
 			);
 			productName = SocialMeadiaFeed;
-			productReference = A83953C22E4362DA0036A1C9 /* SocialMeadiaFeed.app */;
+			productReference = A83953C22E4362DA0036A1C9 /* SocialMediaFeed.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -104,12 +104,12 @@
 					};
 				};
 			};
-			buildConfigurationList = A83953BD2E4362DA0036A1C9 /* Build configuration list for PBXProject "SocialMeadiaFeed" */;
-			developmentRegion = en;
+			buildConfigurationList = A83953BD2E4362DA0036A1C9 /* Build configuration list for PBXProject "SocialMediaFeed" */;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ru,
 			);
 			mainGroup = A83953B92E4362DA0036A1C9;
 			minimizedProjectReferenceProxies = 1;
@@ -121,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A83953C12E4362DA0036A1C9 /* SocialMeadiaFeed */,
+				A83953C12E4362DA0036A1C9 /* SocialMediaFeed */,
 			);
 		};
 /* End PBXProject section */
@@ -156,7 +156,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CHYW2NTRQ3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SocialMeadiaFeed/Info.plist;
+				INFOPLIST_FILE = SocialMediaFeed/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SMF;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -168,7 +168,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SolodyankinieIE.SocialMeadiaFeed;
+				PRODUCT_BUNDLE_IDENTIFIER = SolodyankinieIE.SocialMediaFeed;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -189,7 +189,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CHYW2NTRQ3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SocialMeadiaFeed/Info.plist;
+				INFOPLIST_FILE = SocialMediaFeed/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SMF;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -201,7 +201,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SolodyankinieIE.SocialMeadiaFeed;
+				PRODUCT_BUNDLE_IDENTIFIER = SolodyankinieIE.SocialMediaFeed;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -218,6 +218,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -282,6 +283,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -337,7 +339,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A83953BD2E4362DA0036A1C9 /* Build configuration list for PBXProject "SocialMeadiaFeed" */ = {
+		A83953BD2E4362DA0036A1C9 /* Build configuration list for PBXProject "SocialMediaFeed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A83953D82E4362DE0036A1C9 /* Debug */,
@@ -346,7 +348,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A83953D52E4362DE0036A1C9 /* Build configuration list for PBXNativeTarget "SocialMeadiaFeed" */ = {
+		A83953D52E4362DE0036A1C9 /* Build configuration list for PBXNativeTarget "SocialMediaFeed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A83953D62E4362DE0036A1C9 /* Debug */,

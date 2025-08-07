@@ -60,13 +60,12 @@ final class PostFeedViewModel {
         
         let postsWithAuthors = posts.compactMap { post -> PostWithAuthor? in
             guard let user = users.first(where: { $0.id == post.userId }),
-                  let avatarURL = ImageService.shared.fetchURL(for: post.userId) else {
+                  let avatarURL = ImageURLService.shared.fetchURL(for: post.userId) else {
                 return nil
             }
             return PostWithAuthor(id: post.id, title: post.title, body: post.body, author: user.name, avatar: avatarURL)
         }
         
         self.postsWithAuthors = postsWithAuthors
-        onPostsUpdated?()
     }
 }
