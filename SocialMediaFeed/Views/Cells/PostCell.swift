@@ -39,6 +39,13 @@ final class PostCell: UITableViewCell {
         return image
     }()
     
+    private lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        return button
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupSubviews()
@@ -71,6 +78,7 @@ final class PostCell: UITableViewCell {
         contentView.addSubview(bodyLabel)
         contentView.addSubview(authorLabel)
         contentView.addSubview(avatarImage)
+        contentView.addSubview(favoriteButton)
     }
     
     private func setupConstraints() {
@@ -80,9 +88,14 @@ final class PostCell: UITableViewCell {
             avatarImage.heightAnchor.constraint(equalToConstant: 50),
             avatarImage.widthAnchor.constraint(equalToConstant: 50),
             
+            favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            favoriteButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 30),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 30),
+            
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             titleLabel.leftAnchor.constraint(equalTo: avatarImage.rightAnchor, constant: 16),
-            titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
+            titleLabel.rightAnchor.constraint(equalTo: favoriteButton.leftAnchor, constant: -16),
             
             bodyLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
             bodyLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor),

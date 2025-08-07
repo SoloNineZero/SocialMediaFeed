@@ -19,6 +19,7 @@ final class PostFeedVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        title = "Лента постов"
         setupSubviews()
         setupConstraints()
         bindViewModel()
