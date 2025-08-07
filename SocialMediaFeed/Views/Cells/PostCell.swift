@@ -64,11 +64,16 @@ final class PostCell: UITableViewCell {
         currentAvatarURL = post.avatar
         
         ImageLoaderService.load(from: post.avatar) { [weak self] image in
-            guard let self = self else { return }
-            if let image = image {
-                self.avatarImage.image = image
-            } else {
-                print("Аватарка не установлена")
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                // Проверяет, что url совпадает с тем, что ожидается
+                if self.currentAvatarURL == post.avatar {
+                    if let image = image {
+                        self.avatarImage.image = image
+                    } else {
+                        print("Аватарка не установлена")
+                    }
+                }
             }
         }
     }
