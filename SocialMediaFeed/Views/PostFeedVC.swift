@@ -18,7 +18,7 @@ final class PostFeedVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .systemBackground
         setupSubviews()
         setupConstraints()
         bindViewModel()

@@ -2,6 +2,8 @@ import UIKit
 
 final class PostCell: UITableViewCell {
     static let reuseIdentifier = "PostCell"
+    
+    private var currentAvatarURL: URL?
         
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -52,11 +54,23 @@ final class PostCell: UITableViewCell {
         bodyLabel.text = post.body
         authorLabel.text = post.author
         avatarImage.image = UIImage(systemName: "person.crop.circle")
+        currentAvatarURL = post.avatar
+
+//        ImageLoaderService.load(from: post.avatar) { [weak self] image in
+//            guard let self = self else { return }
+//            guard self.currentAvatarURL == post.avatar else { return }
+//            if let image = image {
+//                self.avatarImage.image = image
+//            }
+//        }
         
         ImageLoaderService.load(from: post.avatar) { [weak self] image in
             guard let self = self else { return }
             if let image = image {
+                print("📲 Устанавливаю аватарку")
                 self.avatarImage.image = image
+            } else {
+                print("⚠️ Аватарка не установлена")
             }
         }
     }
