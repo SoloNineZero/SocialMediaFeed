@@ -44,29 +44,18 @@ final class PostFeedVC: UIViewController {
     
     private func bindViewModel() {
         viewModel.fetchData()
-//
-//        viewModel.onPostsUpdated = { [weak self] in
-//            DispatchQueue.main.async {
-//                self?.isLoading = false
-//                self?.tableView.reloadData()
-//            }
-//        }
-//        
-//        viewModel.onError = { error in
-//            print("Ошибка \(error.localizedDescription)")
-//        }
-        
+
         viewModel.onPostsUpdated = { [weak self] in
             DispatchQueue.main.async {
                 self?.isLoading = false
                 self?.tableView.reloadData()
-                self?.refreshControl.endRefreshing() // <--- здесь останавливаем refresh
+                self?.refreshControl.endRefreshing()
             }
         }
 
         viewModel.onError = { [weak self] error in
             DispatchQueue.main.async {
-                self?.refreshControl.endRefreshing() // останавливаем и при ошибке
+                self?.refreshControl.endRefreshing()
                 print("Ошибка \(error.localizedDescription)")
             }
         }

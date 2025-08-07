@@ -66,7 +66,6 @@ final class ShimmerPostCell: UITableViewCell {
             bodyView.rightAnchor.constraint(equalTo: titleView.rightAnchor),
             bodyView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             bodyView.heightAnchor.constraint(greaterThanOrEqualToConstant: 120)
-            
         ])
     }
 }

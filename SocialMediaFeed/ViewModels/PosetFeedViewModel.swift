@@ -4,38 +4,38 @@ import Foundation
 /// Реализует пагинацию и обновление данных.
 final class PostFeedViewModel {
     
-    /// Замыкание, вызываемое при обновлении списка постов (для обновления UI)
+    /// Замыкание, вызываемое при обновлении списка постов (для обновления UI).
     var onPostsUpdated: (() -> Void)?
     
-    /// Коллбэк, вызываемый при ошибках загрузки (для отображения ошибки)
+    /// Коллбэк, вызываемый при ошибках загрузки (для отображения ошибки).
     var onError: ((Error) -> Void)?
     
-    /// Размер страницы — сколько постов загружается за один запрос
+    /// Размер страницы — сколько постов загружается за один запрос.
     private let pagePostSize = 20
     
-    /// Текущая странциа
+    /// Текущая страница.
     private var currentPage = 1
     
-    /// Флаг, что загрузка сейчас в процессе (чтобы не запускать несколько запросов одновременно)
+    /// Флаг, что загрузка сейчас в процессе (чтобы не запускать несколько запросов одновременно).
     private var isLoadingPage = false
     
-    /// Флаг, что есть посты для загрузки
+    /// Флаг, что есть посты для загрузки.
     private var canLoadMorePages = true
     
     private let postService = PostService()
     private let userService = UserService()
     
-    /// Массив постов с данными авторов
+    /// Массив постов с данными авторов.
     private var postsWithAuthors: [PostWithAuthor] = [] {
         didSet { onPostsUpdated?() }
     }
     
-    /// Массив пользователей
+    /// Массив пользователей.
     private var users: [User]? {
         didSet { mergePostsAndUsers() }
     }
     
-    /// Массив постов
+    /// Массив постов.
     private var posts: [Post]? {
         didSet { mergePostsAndUsers() }
     }
