@@ -59,7 +59,6 @@ final class PostCell: UITableViewCell {
         ImageLoaderService.load(from: post.avatar) { [weak self] image in
             guard let self = self else { return }
             if let image = image {
-                print("📲 Устанавливаю аватарку")
                 self.avatarImage.image = image
             } else {
                 print("Аватарка не установлена")
