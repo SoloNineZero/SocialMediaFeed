@@ -5,6 +5,11 @@ final class PostFeedViewModel {
     var onPostsUpdated: (() -> Void)?
     var onError: ((Error) -> Void)?
     
+    private var currentPage = 1
+    private let pagePostSize = 20
+    private var isLoadingPage = false
+    private var canLoadMorePages = true
+    
     private let postService = PostService()
     private let userService = UserService()
     
@@ -22,7 +27,7 @@ final class PostFeedViewModel {
     
     func fetchData() {
         fetchUsers()
-        fetchPosts()
+//        fetchPosts()
     }
     
     func numberOfPosts() -> Int {
@@ -33,26 +38,71 @@ final class PostFeedViewModel {
         postsWithAuthors[index]
     }
     
+//    private func fetchUsers() {
+//        userService.fetchUsers { [weak self] result in
+//            switch result {
+//            case .success(let users):
+//                self?.users = users
+//            case .failure(let error):
+//                self?.onError?(error)
+//            }
+//        }
+//    }
+    
     private func fetchUsers() {
         userService.fetchUsers { [weak self] result in
             switch result {
             case .success(let users):
                 self?.users = users
+                self?.fetchPosts(page: 1) // первая страница после загрузки пользователей
             case .failure(let error):
                 self?.onError?(error)
             }
         }
     }
     
-    private func fetchPosts() {
-        postService.fetchPost { [weak self] result in
+//    private func fetchPosts() {
+//        postService.fetchPost { [weak self] result in
+//            switch result {
+//            case .success(let posts):
+//                self?.posts = posts
+//            case .failure(let error):
+//                self?.onError?(error)
+//            }
+//        }
+//    }
+    
+    func fetchPosts(page: Int = 1) {
+        guard !isLoadingPage, canLoadMorePages else { return }
+        isLoadingPage = true
+        
+        postService.fetchPosts(page: page, limit: pagePostSize) { [weak self] result in
+            guard let self = self else { return }
+            self.isLoadingPage = false
+            
             switch result {
-            case .success(let posts):
-                self?.posts = posts
+            case .success(let newPosts):
+                if newPosts.count < self.pagePostSize {
+                    self.canLoadMorePages = false
+                }
+                
+                if page == 1 {
+                    self.posts = newPosts
+                } else {
+                    self.posts? += newPosts
+                }
+                
+                self.currentPage = page + 1
+                
             case .failure(let error):
-                self?.onError?(error)
+                self.onError?(error)
             }
         }
+    }
+    
+    func loadNextPageIfNeeded(currentIndex: Int) {
+        guard currentIndex >= (postsWithAuthors.count - 5) else { return }
+        fetchPosts(page: currentPage)
     }
     
     private func mergePostsAndUsers() {
