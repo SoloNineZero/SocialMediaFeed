@@ -60,21 +60,12 @@ final class PostCell: UITableViewCell {
         titleLabel.text = post.title
         bodyLabel.text = post.body
         authorLabel.text = post.author
-        avatarImage.image = UIImage(systemName: "person.crop.circle")
-        currentAvatarURL = post.avatar
         
-        ImageLoaderService.load(from: post.avatar) { [weak self] image in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                // Проверяет, что url совпадает с тем, что ожидается
-                if self.currentAvatarURL == post.avatar {
-                    if let image = image {
-                        self.avatarImage.image = image
-                    } else {
-                        print("Аватарка не установлена")
-                    }
-                }
-            }
+        // Сбрасываем аватарку сразу
+        avatarImage.image = UIImage(systemName: "person.crop.circle")
+        
+        if let image = UIImage(data: post.avatar) {
+            avatarImage.image = image
         }
     }
     

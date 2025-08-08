@@ -17,5 +17,5 @@ struct PostWithAuthor {
     let title: String
     let body: String
     let author: String
-    let avatar: URL
+    let avatar: Data
 }

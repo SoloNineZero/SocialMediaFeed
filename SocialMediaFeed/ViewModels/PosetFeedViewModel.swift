@@ -117,16 +117,36 @@ final class PostFeedViewModel {
     /// Объединяет посты и пользователей в один массив `postsWithAuthors`, чтобы отображать авторов, посты и аватарки
     private func mergePostsAndUsers() {
         guard let users = users, let posts = posts else { return }
-        
-        let postsWithAuthors = posts.compactMap { post -> PostWithAuthor? in
+
+        var tempPostsWithAuthors = Array<PostWithAuthor?>(repeating: nil, count: posts.count)
+        let group = DispatchGroup()
+
+        for (index, post) in posts.enumerated() {
             guard let user = users.first(where: { $0.id == post.userId }),
                   let avatarURL = ImageURLService.shared.fetchURL(for: post.userId) else {
-                return nil
+                continue
             }
-            return PostWithAuthor(id: post.id, title: post.title, body: post.body, author: user.name, avatar: avatarURL)
+
+            group.enter()
+            DispatchQueue.global().async {
+                defer { group.leave() }
+
+                let avatarData = (try? Data(contentsOf: avatarURL)) ?? Data()
+
+                let postWithAuthor = PostWithAuthor(
+                    id: post.id,
+                    title: "\(post.id) \(post.title)",
+                    body: post.body,
+                    author: user.name,
+                    avatar: avatarData
+                )
+                tempPostsWithAuthors[index] = postWithAuthor
+            }
         }
-        
-        // Обновляет массив
-        self.postsWithAuthors = postsWithAuthors
+
+        group.notify(queue: .main) {
+            // Убираем nil перед присваиванием
+            self.postsWithAuthors = tempPostsWithAuthors.compactMap { $0 }
+        }
     }
 }
